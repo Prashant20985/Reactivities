@@ -1,12 +1,7 @@
 ﻿using Application.Core;
-using AutoMapper;
 using MediatR;
 using Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Application.Activities
 {
@@ -28,6 +23,7 @@ namespace Application.Activities
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var activity = await _context.Activities.FindAsync(request.Id);
+                
                 if (activity == null) return null;
 
                 _context.Remove(activity);
