@@ -1,15 +1,21 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, List } from "semantic-ui-react";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
-import ActivityDetails from "../Details/ActivityDetails";
-import ActivityForm from "../Form/ActivityForm";
+import ActivityFilter from "./ActivityFilter";
 import ActivityList from "./ActivityList";
 
 function ActivityDashBoard() {
-
   const {activityStore} = useStore();
-  const {selectedActivity, editMode} = activityStore;
+  const {loadActivities, activityRegistry} = activityStore;
+
+  useEffect(() => {
+    if(activityRegistry.size <= 1) loadActivities();
+  }, [loadActivities, activityRegistry.size]);
+
+  if (activityStore.loadingInitial) return <LoadingComponent content="Loading app" />;
+  
   return (
     <Grid>
       <Grid.Column width="10">
@@ -18,12 +24,7 @@ function ActivityDashBoard() {
         </List>
       </Grid.Column>
       <Grid.Column width="6">
-        {selectedActivity && !editMode && (
-          <ActivityDetails />
-        )}
-        {editMode && (
-          <ActivityForm />
-        )}
+        <ActivityFilter />
       </Grid.Column>
     </Grid>
   );
