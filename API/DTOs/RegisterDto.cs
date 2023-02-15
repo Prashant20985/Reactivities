@@ -5,6 +5,7 @@ namespace API.DTOs
     public class RegisterDto
     {
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
@@ -12,7 +13,6 @@ namespace API.DTOs
         public string Password { get; set; }
 
         [Required]
-        [EmailAddress]
         public string DisplayName { get; set; }
 
         [Required]
