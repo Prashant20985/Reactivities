@@ -13,7 +13,7 @@ import MyTextArea from "../../../app/common/form/MyTextArea";
 import MySelectInput from "../../../app/common/form/MySelectInput";
 import { categoryOptions } from "../../../app/common/options/categoryOptions";
 import MyDateInput from "../../../app/common/form/MyDateInput";
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from "uuid";
 
 export default observer(function ActivityForm() {
   const { activityStore } = useStore();
@@ -51,7 +51,6 @@ export default observer(function ActivityForm() {
     if (id) loadActivity(id).then((activity) => setActivity(activity!));
   }, [id, loadActivity]);
 
-
   function handleFormSubmit(activity: Activity) {
     if (!activity.id) {
       activity.id = uuid();
@@ -65,12 +64,11 @@ export default observer(function ActivityForm() {
     }
   }
 
-
   if (loadingInitial) return <LoadingComponent content="Loading Activity..." />;
 
   return (
     <Segment clearing>
-      <Header content='Activity Deatils' sub color="teal" />
+      <Header content="Activity Deatils" sub color="teal" />
       <Formik
         validationSchema={validationSchema}
         enableReinitialize
@@ -93,11 +91,11 @@ export default observer(function ActivityForm() {
               timeCaption="time"
               dateFormat="MMMM d, yyyy h:m aa"
             />
-            <Header content='Location Details' sub color="teal" />
+            <Header content="Location Details" sub color="teal" />
             <MyTextInput placeholder="City" name="city" />
             <MyTextInput placeholder="Venue" name="venue" />
             <Button
-            disabled={isSubmitting || !dirty || !isValid}
+              disabled={isSubmitting || !dirty || !isValid}
               loading={loading}
               floated="right"
               positive
