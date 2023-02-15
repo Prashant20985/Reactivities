@@ -9,5 +9,7 @@
         public string Categry { get; set; }
         public string City { get; set; }
         public string Venue { get; set; }
+        public bool IsCancelled { get; set; }
+        public ICollection<ActivityAttendee> Attendees { get; set; } = new List<ActivityAttendee>();
     }
 }
